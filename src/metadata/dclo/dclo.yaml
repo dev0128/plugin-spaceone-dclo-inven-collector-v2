@@ -1,0 +1,125 @@
+search:
+  fields:
+    - Code: data.code
+    - Name: data.name
+    - Category: data.category
+    - Severity: data.join_date
+      type: enum
+      enums:
+      - High: 
+        type: badge 
+        background_color: red.500
+      - Medium:
+        type: badge 
+        background_color: red.500
+      - Low:
+        type: badge 
+        background_color: red.500
+    - Result: data.flag
+      type: enum
+      enums:
+      - Vuln:
+        type: badge 
+        background_color: red.500
+      - Secure:
+        type: badge 
+        background_color: red.500
+      - N/A:
+        type: badge 
+        background_color: red.500
+table:
+  sort:
+    key: data.code
+    desc: false
+  fields:
+    - Category: data.category
+    - Rule Name: data.name
+    - Severity: data.report_lv
+      type: enum
+      enums: 
+        - High: 
+          type: badge 
+          background_color: red.500
+        - Medium:
+          type: badge 
+          background_color: red.500
+        - Low:
+          type: badge 
+          background_color: red.500
+    - Findings: data.findings_cnt
+    - Result: data.report_lv
+      type: enum
+      enums: 
+        - Vuln: 
+          type: badge
+          background_color: red.500
+        - Secure:
+          type: badge
+          background_color: red.500
+        - N/A:
+          type: badge
+          background_color: red.500
+tabs.0:
+  name: Details
+  type: item
+  fields:
+    - Rule ID: data.code
+    - Rule Name: data.name
+    - Category: data.category
+    - Severity: data.report_lv
+      type: enum
+      enums: 
+        - High: 
+          type: badge
+          background_color: red.500
+        - Medium:
+          type: badge
+          background_color: red.500
+        - Low:
+          type: badge
+          background_color: red.500
+    - Description: data.compliance_decs
+    - Assessment Criteria: data.rule_standard
+    - Mitigation Plan: data.action_plan
+tabs.1:
+  name: Compliance
+  items:
+  - name: List
+    type: table
+    root_path: data.compliance_dtl
+    fields:
+    - Major: com_1
+    - Sub: com_2
+    - Subclass: com_3
+tabs.2:
+  name: Vulnerable List
+  items:
+  - name: List
+    type: table
+    root_path: data.flag_key
+    fields:
+    - Region: region
+    - Resource ID: id
+    - Resource Name: name
+    - Resource Type: resource_type
+    - Vulnerable Findings: detail
+      type: more
+      popup_key: popup_data
+      popup_name: Vulnerable Status
+      popup_type: raw
+tabs.3:
+  name: Secure List
+  items:
+  - name: List
+    type: table
+    root_path: data.good_key
+    fields:
+      - Region: region
+      - Resource ID: id
+      - Resource Name: name
+      - Resource Type: resource_type
+      - Secure Findings: detail
+        type: more
+        popup_key: popup_data
+        popup_name: Vulnerable Status
+        popup_type: raw
