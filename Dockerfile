@@ -10,7 +10,8 @@ RUN apt update && apt upgrade -y
 COPY pkg/*.txt ${PKG_DIR}/
 
 RUN pip install --upgrade pip && \
-    pip install --upgrade -r ${PKG_DIR}/pip_requirements.txt
+    pip install --upgrade -r ${PKG_DIR}/pip_requirements.txt && \
+    pip install --upgrade --pre spaceone-inventory
 
 ARG CACHEBUST=1
 RUN pip install --upgrade spaceone-core spaceone-api
