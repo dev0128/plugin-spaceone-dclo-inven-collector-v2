@@ -43,13 +43,3 @@ def collector_collect(params: dict) -> Generator[dict, None, None]:
     dclo_mgr = DcloManager()
 
     return dclo_mgr.collect_resources(options, secret_data, schema)
-
-
-@app.route("Collector.verify")
-def collector_verify(params: dict) -> None:
-    pass
-
-
-@app.route("Job.get_tasks")
-def job_get_tasks(params: dict) -> dict:
-    pass
