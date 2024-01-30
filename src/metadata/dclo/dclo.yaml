@@ -11,10 +11,10 @@ search:
         background_color: red.500
       - Medium:
         type: badge 
-        background_color: red.500
+        background_color: red.200
       - Low:
         type: badge 
-        background_color: red.500
+        background_color: yellow.300
     - Result: data.flag
       type: enum
       enums:
@@ -23,15 +23,16 @@ search:
         background_color: red.500
       - Secure:
         type: badge 
-        background_color: red.500
+        background_color: blue.500
       - N/A:
         type: badge 
-        background_color: red.500
+        background_color: gray.500
 table:
   sort:
     key: data.code
     desc: false
   fields:
+    # - Region: data.region 추가?
     - Category: data.category
     - Rule Name: data.name
     - Severity: data.report_lv
@@ -42,12 +43,12 @@ table:
           background_color: red.500
         - Medium:
           type: badge 
-          background_color: red.500
+          background_color: red.200
         - Low:
           type: badge 
-          background_color: red.500
+          background_color: yellow.300
     - Findings: data.findings_cnt
-    - Result: data.report_lv
+    - Result: data.flag
       type: enum
       enums: 
         - Vuln: 
@@ -55,10 +56,10 @@ table:
           background_color: red.500
         - Secure:
           type: badge
-          background_color: red.500
+          background_color: blue.500
         - N/A:
           type: badge
-          background_color: red.500
+          background_color: gray.500
 tabs.0:
   name: Details
   type: item
@@ -74,10 +75,10 @@ tabs.0:
           background_color: red.500
         - Medium:
           type: badge
-          background_color: red.500
+          background_color: red.200
         - Low:
           type: badge
-          background_color: red.500
+          background_color: yellow.300
     - Description: data.compliance_decs
     - Assessment Criteria: data.rule_standard
     - Mitigation Plan: data.action_plan
