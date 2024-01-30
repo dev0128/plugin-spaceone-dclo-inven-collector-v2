@@ -11,17 +11,10 @@ def collector_init(params: dict) -> dict:
     return {
         "metadata": {
             "options_schema": {
-                "required": ["provider", "compliance_framework"],
-                "order": ["provider", "compliance_framework"],
+                "required": ["compliance_framework"],
+                "order": ["compliance_framework"],
                 "type": "object",
                 "properties": {
-                    "provider": {
-                        "title": "Provider",
-                        "type": "string",
-                        "default": "aws",
-                        "enum": list(COMPLIANCE_FRAMEWORKS.keys()),
-                        "disabled": False,
-                    },
                     "compliance_framework": {
                         "title": "Compliance Framework",
                         "type": "string",

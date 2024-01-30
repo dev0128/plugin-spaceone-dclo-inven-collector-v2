@@ -32,6 +32,7 @@ table:
     key: data.code
     desc: false
   fields:
+    # - Region: data.region 추가?
     - Category: data.category
     - Rule Name: data.name
     - Severity: data.report_lv
@@ -47,7 +48,7 @@ table:
           type: badge 
           background_color: red.500
     - Findings: data.findings_cnt
-    - Result: data.report_lv
+    - Result: data.flag
       type: enum
       enums: 
         - Vuln: 
