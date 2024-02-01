@@ -1,8 +1,8 @@
 from src.manager.dclo_manager import COMPLIANCE_FRAMEWORKS
-from src.model.plugin_info_model import PluginMetadata
+from src.model.plugin_info_model import PluginInfo, PluginMetadata
 
 
-class AWSPluginInfo:
+class AWSPluginInfo(PluginInfo):
     metadata: PluginMetadata = {
         "options_schema": {
             "required": ["provider", "compliance_framework"],
@@ -45,8 +45,8 @@ class AWSPluginInfo:
     }
 
 
-class GoogleCloudPluginInfo:
-    metadata = {
+class GoogleCloudPluginInfo(PluginInfo):
+    metadata: PluginMetadata = {
         "options_schema": {
             "required": ["provider", "compliance_framework"],
             "order": ["provider", "compliance_framework"],
@@ -69,8 +69,8 @@ class GoogleCloudPluginInfo:
     }
 
 
-class AzurePluginInfo:
-    metadata = {
+class AzurePluginInfo(PluginInfo):
+    metadata: PluginMetadata = {
         "options_schema": {
             "required": ["provider", "compliance_framework"],
             "order": ["provider", "compliance_framework"],

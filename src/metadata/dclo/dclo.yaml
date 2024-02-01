@@ -11,10 +11,10 @@ search:
         background_color: red.500
       - Medium:
         type: badge 
-        background_color: red.200
+        background_color: coral.400
       - Low:
         type: badge 
-        background_color: yellow.300
+        background_color: yellow.500
     - Result: data.flag
       type: enum
       enums:
@@ -42,10 +42,10 @@ table:
           background_color: red.500
         - Medium:
           type: badge 
-          background_color: red.200
+          background_color: coral.400
         - Low:
           type: badge 
-          background_color: yellow.300
+          background_color: yellow.500
     - Findings: data.findings_cnt
     - Result: data.flag
       type: enum
@@ -74,10 +74,10 @@ tabs.0:
           background_color: red.500
         - Medium:
           type: badge
-          background_color: red.200
+          background_color: coral.400
         - Low:
           type: badge
-          background_color: yellow.300
+          background_color: yellow.500
     - Description: data.compliance_decs
     - Assessment Criteria: data.rule_standard
     - Mitigation Plan: data.action_plan
