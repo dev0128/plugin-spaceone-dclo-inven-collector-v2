@@ -47,7 +47,7 @@ table:
           type: badge 
           background_color: yellow.300
     - Findings: data.findings_cnt
-    - Result: data.report_lv
+    - Result: data.flag
       type: enum
       enums: 
         - Vuln: 

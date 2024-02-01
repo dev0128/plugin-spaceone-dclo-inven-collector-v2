@@ -1,5 +1,6 @@
 from typing import Generator
 from spaceone.inventory.plugin.collector.lib.server import CollectorPluginServer
+from src.manager.collector_manager import CollectorManager
 
 from src.manager.dclo_manager import COMPLIANCE_FRAMEWORKS, DcloManager
 
@@ -8,6 +9,7 @@ app = CollectorPluginServer()
 
 @app.route("Collector.init")
 def collector_init(params: dict) -> dict:
+<<<<<<< Updated upstream
     return {
         "metadata": {
             "options_schema": {
@@ -30,8 +32,24 @@ def collector_init(params: dict) -> dict:
                     },
                 },
             },
+=======
+    """init plugin by options
+
+    Args:
+        params (dict): {
+            'options': 'dict',
+            'domain_id': 'str'
+>>>>>>> Stashed changes
         }
-    }
+
+    Returns:
+        plugin_data (dict)
+    """
+
+    options = params.get("options", {})
+
+    collector_mgr = CollectorManager()
+    return collector_mgr.init_response(options)
 
 
 @app.route("Collector.collect")
