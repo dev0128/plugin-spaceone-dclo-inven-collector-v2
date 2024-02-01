@@ -66,7 +66,7 @@ class DcloManager(BaseManager):
 
     def collect_resources(self, options, secret_data, schema):
         try:
-            yield from self.collect_cloud_service_type(options)
+            yield from self.collect_cloud_service_type(options, secret_data, schema)
             yield from self.collect_cloud_service(options, secret_data, schema)
         except Exception as e:
             yield make_error_response(
@@ -76,7 +76,7 @@ class DcloManager(BaseManager):
                 cloud_service_type=self.cloud_service_type,
             )
 
-    def collect_cloud_service_type(self, options):
+    def collect_cloud_service_type(self, options, secret_data, schema):
         self.cloud_service_type = options["compliance_framework"]
         self.provider = options["provider"]
         self._check_compliance_framework()
