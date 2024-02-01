@@ -2,45 +2,19 @@ from typing import Generator
 from spaceone.inventory.plugin.collector.lib.server import CollectorPluginServer
 from src.manager.collector_manager import CollectorManager
 
-from src.manager.dclo_manager import COMPLIANCE_FRAMEWORKS, DcloManager
+from src.manager.dclo_manager import DcloManager
 
 app = CollectorPluginServer()
 
 
 @app.route("Collector.init")
 def collector_init(params: dict) -> dict:
-<<<<<<< Updated upstream
-    return {
-        "metadata": {
-            "options_schema": {
-                "required": ["provider", "compliance_framework"],
-                "order": ["provider", "compliance_framework"],
-                "type": "object",
-                "properties": {
-                    "provider": {
-                        "title": "Provider",
-                        "type": "string",
-                        "default": "aws",
-                        "enum": list(COMPLIANCE_FRAMEWORKS.keys()),
-                        "disabled": False,
-                    },
-                    "compliance_framework": {
-                        "title": "Compliance Framework",
-                        "type": "string",
-                        "enum": list(COMPLIANCE_FRAMEWORKS["aws"].keys()),
-                        "default": "D-CLO Best Practice",
-                    },
-                },
-            },
-=======
     """init plugin by options
 
     Args:
         params (dict): {
             'options': 'dict',
             'domain_id': 'str'
->>>>>>> Stashed changes
-        }
 
     Returns:
         plugin_data (dict)
