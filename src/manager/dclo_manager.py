@@ -138,7 +138,11 @@ class DcloManager(BaseManager):
 
         all_regions = [
             REGION[self.provider].get(region, "---")
-            + (f" | {region}" if region not in ["globals", "AllRegions"] else "")
+            + (
+                f" | {region}"
+                if region not in ["globals", "AllRegions", "global"]
+                else ""
+            )
             for region in good_regions | flag_regions
         ]
 
@@ -291,6 +295,7 @@ class DcloManager(BaseManager):
 
         # 서비스명 정리 하기
         finding["service"] = SERVICES[self.provider].get(finding["category"], "---")
+        finding["category"] = SERVICES[self.provider].get(finding["category"], "---")
 
         finding["findings_cnt"] = (
             f"{finding['flag_items']} / {finding['checked_items']}"

@@ -71,6 +71,7 @@ REGION = {
     },
     "google_cloud": {
         "globals": "Global",
+        "global": "Global",
         "northamerica-northeast1": "Canada, Québec (Montréal)",
         "northamerica-northeast2": "Canada, Ontario (Toronto)",
         "us-central1": "US, Iowa (Council Bluffs)",
