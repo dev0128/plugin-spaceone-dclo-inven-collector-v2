@@ -50,6 +50,7 @@ SERVICES = {
 REGION = {
     "aws": {
         "globals": "Global",
+        "AllRegions": "Global",
         "ap-northeast-1": "Asia Pacific (Tokyo)",
         "ap-northeast-2": "Asia Pacific (Seoul)",
         "ap-northeast-3": "Asia Pacific (Osaka-Local)",

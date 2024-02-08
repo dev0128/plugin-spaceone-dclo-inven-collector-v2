@@ -37,7 +37,7 @@ table:
   fields:
     - Category: data.category
     - Rule Name: data.name
-    - Severity: data.severity
+    - Severity: data.report_lv
       type: enum
       enums: 
         - Critical: 
@@ -72,7 +72,7 @@ tabs.0:
     - Rule ID: data.code
     - Rule Name: data.name
     - Category: data.category
-    - Severity: data.severity
+    - Severity: data.report_lv
       type: enum
       enums: 
         - Critical: 

@@ -138,6 +138,7 @@ class DcloManager(BaseManager):
 
         all_regions = [
             REGION[self.provider].get(region, "---")
+            + (f" | {region}" if region not in ["globals", "AllRegions"] else "")
             for region in good_regions | flag_regions
         ]
 
@@ -285,8 +286,8 @@ class DcloManager(BaseManager):
             "Low": "LOW",
         }
 
-        finding["severity"] = SEVERITIES[finding["report_lv"]].capitalize()
-        finding["report_lv"] = SEVERITIES[finding["report_lv"]]
+        finding["severity"] = SEVERITIES[finding["report_lv"]]
+        finding["report_lv"] = SEVERITIES[finding["report_lv"]].capitalize()
 
         # 서비스명 정리 하기
         finding["service"] = SERVICES[self.provider].get(finding["category"], "---")
