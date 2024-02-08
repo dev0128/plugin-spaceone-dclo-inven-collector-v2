@@ -11,39 +11,39 @@ SERVICES = {
         "dynamodb": "DynamoDB",
         "ec2": "EC2",
         "eks": "EKS",
-        "elasticache": "",  #
+        "elasticache": "ElastiCache",  #
         "elb": "ELB",
         "elbv2": "ELBv2",
         "iam": "IAM",
-        "kafka": "",  #
+        "kafka": "MSK(Kafka)",  #
         "kms": "KMS",
         "rds": "RDS",
         "redshift": "Redshift",
         "s3": "S3",
         "sqs": "SQS",
         "vpc": "VPC",
-        "wafv2": "",  #
+        "wafv2": "WAF&Shield",  #
         "workspaces": "WorkSpaces",
     },
     "google_cloud": {
-        "cloudfunction": "",  #
+        "cloudfunction": "CloudFunctions",  #
         "cloudsql": "CloudSQL",
-        "cloudstorage": "",  #
-        "gce": "",  #
+        "cloudstorage": "CloudStorage",  #
+        "gce": "ComputeEngine",  #
         "iam": "IAM",
-        "kms": "KMS",
-        "stackdriver": "",  #
+        "kms": "KeyManagement",
+        "stackdriver": "Stackdriver",  #
     },
     "azure": {
-        "AAD": "",  #
-        "AppService": "",  #
-        "DataBase": "",  #
-        "KeyVault": "",  #
-        "LoggingMonitoring": "",  #
-        "Network": "",  #
-        "SecurityCenter": "",  #
-        "StorageAccounts": "",  #
-        "VirtualMachines": "",  #
+        "AAD": "MEID(AAD)",  #
+        "AppService": "AppServices",  #
+        "DataBase": "DataBase",  #
+        "KeyVault": "KeyVaults",  #
+        "LoggingMonitoring": "Monitor",  #
+        "Network": "Network",  #
+        "SecurityCenter": "Security",  #
+        "StorageAccounts": "StorageAccounts",  #
+        "VirtualMachines": "VirtualMachines",  #
     },
 }
 
