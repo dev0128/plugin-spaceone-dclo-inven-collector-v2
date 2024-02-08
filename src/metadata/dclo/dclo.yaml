@@ -6,9 +6,12 @@ search:
     - Severity: data.join_date
       type: enum
       enums:
+      - Critical: 
+        type: badge
+        background_color: red.500
       - High: 
         type: badge 
-        background_color: red.500
+        background_color: coral.400
       - Medium:
         type: badge 
         background_color: coral.400
@@ -34,12 +37,15 @@ table:
   fields:
     - Category: data.category
     - Rule Name: data.name
-    - Severity: data.report_lv
+    - Severity: data.severity
       type: enum
       enums: 
+        - Critical: 
+          type: badge
+          background_color: red.500
         - High: 
           type: badge 
-          background_color: red.500
+          background_color: coral.400
         - Medium:
           type: badge 
           background_color: coral.400
@@ -66,12 +72,15 @@ tabs.0:
     - Rule ID: data.code
     - Rule Name: data.name
     - Category: data.category
-    - Severity: data.report_lv
+    - Severity: data.severity
       type: enum
       enums: 
-        - High: 
+        - Critical: 
           type: badge
           background_color: red.500
+        - High: 
+          type: badge
+          background_color: coral.400
         - Medium:
           type: badge
           background_color: coral.400

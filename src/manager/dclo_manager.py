@@ -6,6 +6,8 @@ from spaceone.core.manager import BaseManager
 from spaceone.inventory.plugin.collector.lib import *
 from spaceone.core.error import ERROR_INVALID_PARAMETER
 
+from src.manager.constant import REGION, SERVICES
+
 
 from ..connector.dclo_connector import DcloConnector
 
@@ -253,24 +255,33 @@ class DcloManager(BaseManager):
     #     return results
 
     def _covert_dclo_to_spaceOne(self, finding):
-        # severity = report_lv
-        # service = category
-        # ok = stats.checks.fail
-        # ok = stats.checks.pass
-        # ok = stats.checks.info
-        # ok = stats.findings.fail
-        # ok = stats.findings.pass
-        # ok = stats.findings.info
-        # ok = stats.score.fail
-        # ok = stats.score.pass
+
+        # 리전명 통일 하기
+        good_regions = set([item["region"] for item in finding["good_key"]])
+        flag_regions = set([item["region"] for item in finding["flag_key"]])
+
+        all_regions = [
+            REGION[self.provider].get(region, "---")
+            for region in good_regions | flag_regions
+        ]
+
+        finding["region"] = "multiple" if len(all_regions) > 1 else all_regions[0]
 
         # 우리꺼 데이터 백업 후
-        finding["status_back"] = finding["status"]  # CLEAR | NA 등등
-        finding["status"] = (
-            "PASS" if finding["flag"] == "Secure" else "FAIL"
-        )  # FAIL | PASS
-        finding["severity"] = finding["report_lv"].upper()  # MEDIUM | HIGH | LOW
-        finding["service"] = finding["category"]
+        finding["status_back"] = finding["status"]
+        finding["status"] = "FAIL" if finding["flag"] == "Vuln" else "PASS"
+
+        SEVERITIES = {
+            "High": "CRITICAL",
+            "Medium": "HIGH",
+            "Low": "LOW",
+        }
+
+        finding["severity"] = SEVERITIES[finding["report_lv"]]
+        finding["report_lv"] = SEVERITIES[finding["report_lv"]].capitalize()
+
+        # 서비스명 정리 하기
+        finding["service"] = SERVICES[self.provider].get(finding["category"], "---")
 
         finding["findings_cnt"] = (
             f"{finding['flag_items']} / {finding['checked_items']}"
