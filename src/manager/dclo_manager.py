@@ -105,6 +105,10 @@ class DcloManager(BaseManager):
         )
 
         for finding in compliance_results.get("findings", []):
+
+            # 리전명 통일 하기
+            self._covert_region_name(finding)
+
             cloud_service = make_cloud_service(
                 name=finding["code"],
                 account=diag_id,
@@ -127,6 +131,20 @@ class DcloManager(BaseManager):
                     ]
                 ],
             )
+
+    def _covert_region_name(self, finding):
+        good_regions = set([item["region"] for item in finding["good_key"]])
+        flag_regions = set([item["region"] for item in finding["flag_key"]])
+
+        all_regions = [
+            REGION[self.provider].get(region, "---")
+            for region in good_regions | flag_regions
+        ]
+
+        if not all_regions:
+            all_regions = [""]
+
+        finding["region"] = "multiple" if len(all_regions) > 1 else all_regions[0]
 
     def _check_compliance_framework(self):
         all_compliance_frameworks = list(COMPLIANCE_FRAMEWORKS[self.provider].keys())
@@ -257,20 +275,6 @@ class DcloManager(BaseManager):
 
     def _covert_dclo_to_spaceOne(self, finding):
 
-        # 리전명 통일 하기
-        good_regions = set([item["region"] for item in finding["good_key"]])
-        flag_regions = set([item["region"] for item in finding["flag_key"]])
-
-        all_regions = [
-            REGION[self.provider].get(region, "---")
-            for region in good_regions | flag_regions
-        ]
-
-        if not all_regions:
-            all_regions = [""]
-
-        finding["region"] = "multiple" if len(all_regions) > 1 else all_regions[0]
-
         # 우리꺼 데이터 백업 후
         finding["status_back"] = finding["status"]
         finding["status"] = "FAIL" if finding["flag"] == "Vuln" else "PASS"
@@ -281,8 +285,8 @@ class DcloManager(BaseManager):
             "Low": "LOW",
         }
 
-        finding["severity"] = SEVERITIES[finding["report_lv"]]
-        finding["report_lv"] = SEVERITIES[finding["report_lv"]].capitalize()
+        finding["severity"] = SEVERITIES[finding["report_lv"]].capitalize()
+        finding["report_lv"] = SEVERITIES[finding["report_lv"]]
 
         # 서비스명 정리 하기
         finding["service"] = SERVICES[self.provider].get(finding["category"], "---")
