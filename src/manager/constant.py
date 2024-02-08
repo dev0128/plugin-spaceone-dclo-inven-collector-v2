@@ -51,6 +51,7 @@ REGION = {
     "aws": {
         "globals": "Global",
         "AllRegions": "Global",
+        "global": "Global",
         "ap-northeast-1": "Asia Pacific (Tokyo)",
         "ap-northeast-2": "Asia Pacific (Seoul)",
         "ap-northeast-3": "Asia Pacific (Osaka-Local)",
@@ -116,6 +117,7 @@ REGION = {
     },
     "azure": {
         "globals": "Global",
+        "global": "Global",
         "eastus": "(US) East US",
         "eastus2": "(US) East US 2",
         "southcentralus": "(US) South Central US",
