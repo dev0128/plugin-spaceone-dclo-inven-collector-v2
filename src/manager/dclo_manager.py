@@ -265,6 +265,9 @@ class DcloManager(BaseManager):
             for region in good_regions | flag_regions
         ]
 
+        if not all_regions:
+            all_regions = [""]
+
         finding["region"] = "multiple" if len(all_regions) > 1 else all_regions[0]
 
         # 우리꺼 데이터 백업 후
