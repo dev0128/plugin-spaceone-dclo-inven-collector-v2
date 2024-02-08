@@ -111,6 +111,7 @@ class DcloManager(BaseManager):
                 cloud_service_type=self.cloud_service_type,
                 cloud_service_group=self.cloud_service_group,
                 provider=self.provider,
+                region_code=finding["region"],
                 data=self._covert_dclo_to_spaceOne(finding),
             )
             yield make_response(
