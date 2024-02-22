@@ -6,7 +6,7 @@ from spaceone.core.manager import BaseManager
 from spaceone.inventory.plugin.collector.lib import *
 from spaceone.core.error import ERROR_INVALID_PARAMETER
 
-from src.manager.constant import METADATA_WIDGET, REGION, SERVICES
+from src.manager.constant import COMPLIANCE_ICON, METADATA_WIDGET, REGION, SERVICES
 
 
 from ..connector.dclo_connector import DcloConnector
@@ -102,6 +102,9 @@ class DcloManager(BaseManager):
 
         # 위젯 지정
         cloud_service_type["metadata"]["widget"] = METADATA_WIDGET
+
+        # 컴플라이언스 아이콘
+        cloud_service_type["tags"] = COMPLIANCE_ICON
 
         yield make_response(
             cloud_service_type=cloud_service_type,
