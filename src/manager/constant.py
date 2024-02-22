@@ -202,3 +202,64 @@ REGION = {
         "brazilsoutheast": "(South America) Brazil Southeast",
     },
 }
+
+METADATA_WIDGET = [
+    {
+        "name": "Critical",
+        "type": "summary",
+        "options": {"value_options": {"key": "value", "options": {"default": 0}}},
+        "query": {
+            "aggregate": [{"count": {"name": "value"}}],
+            "filter": [
+                {"key": "data.severity", "value": "CRITICAL", "operator": "eq"},
+                {"key": "data.status", "value": "FAIL", "operator": "eq"},
+            ],
+        },
+    },
+    {
+        "name": "High",
+        "type": "summary",
+        "options": {"value_options": {"key": "value", "options": {"default": 0}}},
+        "query": {
+            "aggregate": [{"count": {"name": "value"}}],
+            "filter": [
+                {"key": "data.severity", "value": "HIGH", "operator": "eq"},
+                {"key": "data.status", "value": "FAIL", "operator": "eq"},
+            ],
+        },
+    },
+    {
+        "name": "Low",
+        "type": "summary",
+        "options": {"value_options": {"key": "value", "options": {"default": 0}}},
+        "query": {
+            "aggregate": [{"count": {"name": "value"}}],
+            "filter": [
+                {"key": "data.severity", "value": "LOW", "operator": "eq"},
+                {"key": "data.status", "value": "FAIL", "operator": "eq"},
+            ],
+        },
+    },
+    {
+        "name": "Pass",
+        "type": "summary",
+        "options": {"value_options": {"key": "value", "options": {"default": 0}}},
+        "query": {
+            "aggregate": [{"count": {"name": "value"}}],
+            "filter": [
+                {"key": "data.status", "value": "PASS", "operator": "eq"},
+            ],
+        },
+    },
+    # {
+    #     "name": "N/A",
+    #     "type": "summary",
+    #     "options": {"value_options": {"key": "value", "options": {"default": 0}}},
+    #     "query": {
+    #         "aggregate": [{"count": {"name": "value"}}],
+    #         "filter": [
+    #             {"key": "data.status", "value": "N/A", "operator": "eq"},
+    #         ],
+    #     },
+    # },
+]

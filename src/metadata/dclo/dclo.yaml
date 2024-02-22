@@ -18,18 +18,15 @@ search:
       - Low:
         type: badge 
         background_color: yellow.500
-    - Result: data.flag
+    - Result: data.status
       type: enum
       enums:
-      - Vuln:
+      - FAIL:
         type: badge 
         background_color: red.500
-      - Secure:
+      - PASS:
         type: badge 
         background_color: blue.500
-      - N/A:
-        type: badge 
-        background_color: gray.500
 table:
   sort:
     key: data.code
@@ -37,6 +34,18 @@ table:
   fields:
     - Category: data.category
     - Rule Name: data.name
+    - Result: data.status
+      type: enum
+      enums: 
+        - FAIL: 
+          type: badge
+          background_color: red.500
+        - PASS:
+          type: badge
+          background_color: blue.500
+    - Findings: data.vul_cnt
+    - Findings: data.sec_cnt
+    - Findings: data.tot_cnt
     - Severity: data.report_lv
       type: enum
       enums: 
@@ -52,19 +61,6 @@ table:
         - Low:
           type: badge 
           background_color: yellow.500
-    - Findings: data.findings_cnt
-    - Result: data.flag
-      type: enum
-      enums: 
-        - Vuln: 
-          type: badge
-          background_color: red.500
-        - Secure:
-          type: badge
-          background_color: blue.500
-        - N/A:
-          type: badge
-          background_color: gray.500
 tabs.0:
   name: Details
   type: item

@@ -6,7 +6,7 @@ from spaceone.core.manager import BaseManager
 from spaceone.inventory.plugin.collector.lib import *
 from spaceone.core.error import ERROR_INVALID_PARAMETER
 
-from src.manager.constant import REGION, SERVICES
+from src.manager.constant import METADATA_WIDGET, REGION, SERVICES
 
 
 from ..connector.dclo_connector import DcloConnector
@@ -17,40 +17,43 @@ _LOGGER = logging.getLogger("cloudforet")
 
 COMPLIANCE_FRAMEWORKS = {
     "aws": {
-        "D-CLO Best Practice": "SET-00011014",
         "ISMS": "SET-00026100",
+        "ISO-27001": "SET-00026108",
         "KISA-CSAP(표준)": "SET-00026102",
         "KISA-CSAP(간편)": "SET-00026103",
+        "PCI-DSS 4.0": "SET-00061100",
+        "PCI-DSS 3.2.1": "SET-00026109",
         "CSP 안전성 평가": "SET-00026104",
         "NIS-국가·공공 기관": "SET-00026105",
         "NIS-민간 기관": "SET-00026106",
         "NIS-SaaS": "SET-00026107",
-        "ISO-27001": "SET-00026108",
-        "PCI-DSS 3.2.1": "SET-00026109",
+        "D-CLO Best Practice": "SET-00011014",
     },
     "google_cloud": {
-        "D-CLO Best Practice": "SET-00028128",
         "ISMS": "SET-00028110",
+        "ISO-27001": "SET-00028114",
         "KISA-CSAP(표준)": "SET-00028111",
         "KISA-CSAP(간편)": "SET-00028112",
-        "CSP 안전성 평가": "SET-00028113",
-        "ISO-27001": "SET-00028114",
+        "PCI-DSS 4.0": "SET-00061102",
         "PCI-DSS 3.2.1": "SET-00028115",
+        "CSP 안전성 평가": "SET-00028113",
         "NIS-국가·공공 기관": "SET-00028116",
         "NIS-민간 기관": "SET-00028117",
         "NIS-SaaS": "SET-00028118",
+        "D-CLO Best Practice": "SET-00028128",
     },
     "azure": {
-        "D-CLO Best Practice": "SET-00028129",
         "ISMS": "SET-00028119",
+        "ISO-27001": "SET-00028123",
         "KISA-CSAP(표준)": "SET-00028120",
         "KISA-CSAP(간편)": "SET-00028121",
         "CSP 안전성 평가": "SET-00028122",
-        "ISO-27001": "SET-00028123",
+        "PCI-DSS 4.0": "SET-00061103",
         "PCI-DSS 3.2.1": "SET-00028124",
         "NIS-국가·공공 기관": "SET-00028125",
         "NIS-민간 기관": "SET-00028126",
         "NIS-SaaS": "SET-00028127",
+        "D-CLO Best Practice": "SET-00028129",
     },
 }
 
@@ -92,6 +95,14 @@ class DcloManager(BaseManager):
             is_major=True,
         )
 
+        # 대쉬보드 명 지정
+        cloud_service_type["metadata"]["query_sets"][0][
+            "name"
+        ] = f"{self.provider} D-CLO CSPM"
+
+        # 위젯 지정
+        cloud_service_type["metadata"]["widget"] = METADATA_WIDGET
+
         yield make_response(
             cloud_service_type=cloud_service_type,
             match_keys=[["name", "group", "provider"]],
@@ -118,6 +129,7 @@ class DcloManager(BaseManager):
                 region_code=finding["region"],
                 data=self._covert_dclo_to_spaceOne(finding),
             )
+
             yield make_response(
                 cloud_service=cloud_service,
                 match_keys=[
@@ -297,11 +309,20 @@ class DcloManager(BaseManager):
         finding["service"] = SERVICES[self.provider].get(finding["category"], "---")
         finding["category"] = SERVICES[self.provider].get(finding["category"], "---")
 
-        finding["findings_cnt"] = (
-            f"{finding['flag_items']} / {finding['checked_items']}"
-            if finding["checked_items"]
-            else "-"
-        )
+        if finding["checked_items"] != "-":
+            vul_cnt = int(finding["flag_items"])
+            tot_cnt = int(finding["checked_items"])
+            sec_cnt = tot_cnt - vul_cnt
+
+        finding["vul_cnt"] = vul_cnt if finding["checked_items"] else "-"
+        finding["sec_cnt"] = sec_cnt if finding["checked_items"] else "-"
+        finding["tot_cnt"] = tot_cnt if finding["checked_items"] else "-"
+
+        # finding["findings_cnt"] = (
+        #     f"{finding['flag_items']} / {finding['checked_items']}"
+        #     if finding["checked_items"]
+        #     else "-"
+        # )
 
         for key in finding:
             if key in [
