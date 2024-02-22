@@ -96,12 +96,13 @@ class DcloManager(BaseManager):
         )
 
         # 대쉬보드 명 지정
+        dashboard = {"aws": "AWS", "azr": "Azure", "google_cloud": "Google"}
         cloud_service_type["metadata"]["query_sets"][0][
             "name"
-        ] = f"D-CLO CSPM ({self.provider.capitalize()})"
+        ] = f"D-CLO CSPM ({dashboard[self.provider]})"
 
         # 위젯 지정
-        cloud_service_type["metadata"]["widget"] = METADATA_WIDGET
+        # cloud_service_type["metadata"]["widget"] = METADATA_WIDGET
 
         # 컴플라이언스 아이콘
         cloud_service_type["tags"] = {
