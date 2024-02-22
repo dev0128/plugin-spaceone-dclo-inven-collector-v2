@@ -19,7 +19,7 @@ class AWSPluginInfo(PluginInfo):
                     "title": "Compliance Framework",
                     "type": "string",
                     "enum": list(COMPLIANCE_FRAMEWORKS["aws"].keys()),
-                    "default": "D-CLO Best Practice",
+                    "default": "ISMS",
                 },
                 # "regions": {
                 #     "title": "Region Filter",
@@ -62,7 +62,7 @@ class GoogleCloudPluginInfo(PluginInfo):
                     "title": "Compliance Framework",
                     "type": "string",
                     "enum": list(COMPLIANCE_FRAMEWORKS["google_cloud"].keys()),
-                    "default": "D-CLO Best Practice",
+                    "default": "ISMS",
                 },
             },
         },
@@ -85,7 +85,7 @@ class AzurePluginInfo(PluginInfo):
                 "compliance_framework": {
                     "title": "Compliance Framework",
                     "type": "string",
-                    "default": "D-CLO Best Practice",
+                    "default": "ISMS",
                     "enum": list(COMPLIANCE_FRAMEWORKS["azure"].keys()),
                 },
             },

@@ -98,13 +98,15 @@ class DcloManager(BaseManager):
         # 대쉬보드 명 지정
         cloud_service_type["metadata"]["query_sets"][0][
             "name"
-        ] = f"{self.provider} D-CLO CSPM"
+        ] = f"D-CLO CSPM ({self.provider.capitalize()})"
 
         # 위젯 지정
         cloud_service_type["metadata"]["widget"] = METADATA_WIDGET
 
         # 컴플라이언스 아이콘
-        cloud_service_type["tags"] = COMPLIANCE_ICON
+        cloud_service_type["tags"] = {
+            "spaceone:icon": COMPLIANCE_ICON[self.cloud_service_type]
+        }
 
         yield make_response(
             cloud_service_type=cloud_service_type,
@@ -353,10 +355,10 @@ class DcloManager(BaseManager):
         return finding
 
     def _format_text_and_json(self, text):
-        text = text.replace("\r\n", " ")
-        text = text.replace("b:", "")
-        text = text.replace("b-h2:", "")
-        text = text.replace("h2:", "")
-        text = text.replace("h1:", "")
+        text = text.replace("\r\n", "<br/>\n")
+        text = text.replace("b:", "<br/>\n")
+        text = text.replace("b-h2:", "<br/>\n")
+        text = text.replace("h2:", "<br/>\n")
+        text = text.replace("h1:", "<br/>\n")
 
         return text
