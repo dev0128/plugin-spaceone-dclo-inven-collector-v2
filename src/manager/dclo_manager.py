@@ -309,14 +309,15 @@ class DcloManager(BaseManager):
         finding["service"] = SERVICES[self.provider].get(finding["category"], "---")
         finding["category"] = SERVICES[self.provider].get(finding["category"], "---")
 
-        if finding["checked_items"] != "-":
+        checked_items = finding["checked_items"]
+        if checked_items != "-":
             vul_cnt = int(finding["flag_items"])
-            tot_cnt = int(finding["checked_items"])
+            tot_cnt = int(checked_items)
             sec_cnt = tot_cnt - vul_cnt
 
-        finding["vul_cnt"] = vul_cnt if finding["checked_items"] else "-"
-        finding["sec_cnt"] = sec_cnt if finding["checked_items"] else "-"
-        finding["tot_cnt"] = tot_cnt if finding["checked_items"] else "-"
+        finding["vul_cnt"] = vul_cnt if checked_items else "-"
+        finding["sec_cnt"] = sec_cnt if checked_items else "-"
+        finding["tot_cnt"] = tot_cnt if checked_items else "-"
 
         # finding["findings_cnt"] = (
         #     f"{finding['flag_items']} / {finding['checked_items']}"

@@ -3,16 +3,13 @@ search:
     - Code: data.code
     - Name: data.name
     - Category: data.category
-    - Severity: data.join_date
+    - Severity: data.report_lv
       type: enum
       enums:
       - Critical: 
         type: badge
         background_color: red.500
       - High: 
-        type: badge 
-        background_color: coral.400
-      - Medium:
         type: badge 
         background_color: coral.400
       - Low:
@@ -43,9 +40,9 @@ table:
         - PASS:
           type: badge
           background_color: blue.500
-    - Findings: data.vul_cnt
-    - Findings: data.sec_cnt
-    - Findings: data.tot_cnt
+    - Fail Count: data.vul_cnt
+    - Pass Count: data.sec_cnt
+    - Total Count: data.tot_cnt
     - Severity: data.report_lv
       type: enum
       enums: 
