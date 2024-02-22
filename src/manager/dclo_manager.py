@@ -165,7 +165,11 @@ class DcloManager(BaseManager):
             ]
         else:
             all_regions = [
-                (region if region not in ["globals", "AllRegions", "global"] else "")
+                (
+                    region
+                    if region not in ["globals", "AllRegions", "global"]
+                    else "Global"
+                )
                 for region in good_regions | flag_regions
             ]
 
@@ -361,10 +365,10 @@ class DcloManager(BaseManager):
         return finding
 
     def _format_text_and_json(self, text):
-        text = text.replace("\r\n", "<br/>\n")
-        text = text.replace("b:", "<br/>\n")
-        text = text.replace("b-h2:", "<br/>\n")
-        text = text.replace("h2:", "<br/>\n")
-        text = text.replace("h1:", "<br/>\n")
+        text = text.replace("\r\n", "")
+        text = text.replace("b:", "")
+        text = text.replace("b-h2:", "")
+        text = text.replace("h2:", "")
+        text = text.replace("h1:", "")
 
         return text
