@@ -1,0 +1,69 @@
+name: "[Dispatch] Dev Release"
+
+on:
+  workflow_dispatch:
+      inputs:
+        container_arch:
+          type: choice
+          description: 'choose container architecture'
+          default: linux/amd64,linux/arm64
+          options:
+          - "linux/amd64"
+          - "linux/arm64"
+          - "linux/amd64,linux/arm64"
+
+env:
+  ARCH: ${{ github.event.inputs.container_arch }}
+
+jobs:
+  versioning:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.versioning.outputs.VERSION }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.USER_TOKEN }}
+      - name: Get current date
+        run: |
+          sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+          echo "TIME=$(date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
+      - name: Set version with current date
+        id: versioning
+        run: |
+          echo "VERSION=$(sed 's/v//' < src/VERSION).${{ env.TIME }}" >> $GITHUB_OUTPUT
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: versioning
+    env:
+      VERSION: ${{ needs.versioning.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.USER_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push (Dev Private ECR)
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          platforms: ${{ env.ARCH }}
+          push: true
+          tags: ${{ secrets.DEV_ECR_REPO }}:${{ env.VERSION }}
+          provenance: false

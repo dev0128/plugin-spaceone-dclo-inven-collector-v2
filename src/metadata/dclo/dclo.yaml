@@ -93,7 +93,7 @@ tabs.1:
   name: Compliance
   items:
   - name: List
-    type: table
+    type: raw-table
     root_path: data.compliance_dtl
     fields:
     - Major: com_1
@@ -103,7 +103,7 @@ tabs.2:
   name: Vulnerable List
   items:
   - name: List
-    type: table
+    type: raw-table
     root_path: data.flag_key
     fields:
     - Region: region
@@ -119,7 +119,7 @@ tabs.3:
   name: Secure List
   items:
   - name: List
-    type: table
+    type: raw-table
     root_path: data.good_key
     fields:
       - Region: region

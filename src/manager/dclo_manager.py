@@ -153,15 +153,21 @@ class DcloManager(BaseManager):
         good_regions = set([item["region"] for item in finding["good_key"]])
         flag_regions = set([item["region"] for item in finding["flag_key"]])
 
-        all_regions = [
-            REGION[self.provider].get(region, "---")
-            + (
-                f" | {region}"
-                if region not in ["globals", "AllRegions", "global"]
-                else ""
-            )
-            for region in good_regions | flag_regions
-        ]
+        if self.provider != "azure":
+            all_regions = [
+                REGION[self.provider].get(region, "---")
+                + (
+                    f" | {region}"
+                    if region not in ["globals", "AllRegions", "global"]
+                    else ""
+                )
+                for region in good_regions | flag_regions
+            ]
+        else:
+            all_regions = [
+                (region if region not in ["globals", "AllRegions", "global"] else "")
+                for region in good_regions | flag_regions
+            ]
 
         if not all_regions:
             all_regions = [""]
