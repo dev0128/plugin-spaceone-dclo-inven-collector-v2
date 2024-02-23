@@ -85,46 +85,40 @@ tabs.0:
     - Mitigation Plan: data.action_plan
 tabs.1:
   name: Compliance
-  items:
-  - name: List
-    type: table
-    root_path: data.compliance_dtl
-    fields:
-    - Major: com_1
-    - Sub: com_2
-    - Subclass: com_3
+  type: table
+  root_path: data.compliance_dtl
+  fields:
+  - Major: com_1
+  - Sub: com_2
+  - Subclass: com_3
 tabs.2:
   name: Vulnerable List
-  items:
-  - name: List
-    type: table
-    root_path: data.flag_key
-    fields:
+  type: table
+  root_path: data.flag_key
+  fields:
+  - Region: region
+  - Resource ID: id
+  - Resource Name: name
+  - Resource Type: resource_type
+  - Vulnerable Findings: detail
+    type: more
+    popup_key: popup_data
+    popup_name: Vulnerable Status
+    popup_type: raw
+tabs.3:
+  name: Secure List
+  type: table
+  root_path: data.good_key
+  fields:
     - Region: region
     - Resource ID: id
     - Resource Name: name
     - Resource Type: resource_type
-    - Vulnerable Findings: detail
+    - Secure Findings: detail
       type: more
       popup_key: popup_data
       popup_name: Vulnerable Status
       popup_type: raw
-tabs.3:
-  name: Secure List
-  items:
-  - name: List
-    type: table
-    root_path: data.good_key
-    fields:
-      - Region: region
-      - Resource ID: id
-      - Resource Name: name
-      - Resource Type: resource_type
-      - Secure Findings: detail
-        type: more
-        popup_key: popup_data
-        popup_name: Vulnerable Status
-        popup_type: raw
 query_sets:
 - name: D-clo CSPM Prowler
   unit:
