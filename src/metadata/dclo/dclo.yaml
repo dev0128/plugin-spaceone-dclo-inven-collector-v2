@@ -80,20 +80,14 @@ tabs.0:
         - Low:
           type: badge
           background_color: yellow.500
-    - name: Description
-      root_path: data.compliance_decs
-      type: html
-    - name: Assessment Criteria
-      root_path: data.rule_standard
-      type: html
-    - name: Mitigation Plan
-      root_path: data.action_plan
-      type: html
+    - Description: data.compliance_decs
+    - Assessment Criteria: data.rule_standard
+    - Mitigation Plan: data.action_plan
 tabs.1:
   name: Compliance
   items:
   - name: List
-    type: raw-table
+    type: table
     root_path: data.compliance_dtl
     fields:
     - Major: com_1
@@ -103,7 +97,7 @@ tabs.2:
   name: Vulnerable List
   items:
   - name: List
-    type: raw-table
+    type: table
     root_path: data.flag_key
     fields:
     - Region: region
@@ -119,7 +113,7 @@ tabs.3:
   name: Secure List
   items:
   - name: List
-    type: raw-table
+    type: table
     root_path: data.good_key
     fields:
       - Region: region

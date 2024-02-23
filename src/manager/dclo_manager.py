@@ -96,12 +96,13 @@ class DcloManager(BaseManager):
         )
 
         # 대쉬보드 명 지정
+        dashboard = {"aws": "AWS", "azure": "Azure", "google_cloud": "Google"}
         cloud_service_type["metadata"]["query_sets"][0][
             "name"
-        ] = f"D-CLO CSPM ({self.provider.capitalize()})"
+        ] = f"D-CLO CSPM ({dashboard[self.provider]})"
 
         # 위젯 지정
-        cloud_service_type["metadata"]["widget"] = METADATA_WIDGET
+        # cloud_service_type["metadata"]["widget"] = METADATA_WIDGET
 
         # 컴플라이언스 아이콘
         cloud_service_type["tags"] = {
@@ -165,7 +166,11 @@ class DcloManager(BaseManager):
             ]
         else:
             all_regions = [
-                (region if region not in ["globals", "AllRegions", "global"] else "")
+                (
+                    region
+                    if region not in ["globals", "AllRegions", "global"]
+                    else "Global"
+                )
                 for region in good_regions | flag_regions
             ]
 
@@ -361,10 +366,10 @@ class DcloManager(BaseManager):
         return finding
 
     def _format_text_and_json(self, text):
-        text = text.replace("\r\n", "<br/>\n")
-        text = text.replace("b:", "<br/>\n")
-        text = text.replace("b-h2:", "<br/>\n")
-        text = text.replace("h2:", "<br/>\n")
-        text = text.replace("h1:", "<br/>\n")
+        text = text.replace("\r\n", "")
+        text = text.replace("b:", "")
+        text = text.replace("b-h2:", "")
+        text = text.replace("h2:", "")
+        text = text.replace("h1:", "")
 
         return text
