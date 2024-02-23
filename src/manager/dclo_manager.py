@@ -96,7 +96,7 @@ class DcloManager(BaseManager):
         )
 
         # 대쉬보드 명 지정
-        dashboard = {"aws": "AWS", "azr": "Azure", "google_cloud": "Google"}
+        dashboard = {"aws": "AWS", "azure": "Azure", "google_cloud": "Google"}
         cloud_service_type["metadata"]["query_sets"][0][
             "name"
         ] = f"D-CLO CSPM ({dashboard[self.provider]})"
