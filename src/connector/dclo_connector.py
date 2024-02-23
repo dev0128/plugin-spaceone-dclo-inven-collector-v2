@@ -16,7 +16,7 @@ _LOGGER = logging.getLogger(__name__)
 
 PENDING_SECOND = 60
 TIME_LIMIT_MINUTE = 30
-DCLO_PLUGIN_URL = "https://spaceonedev.d-clo.com/diag"
+DCLO_PLUGIN_URL = "https://spaceone.d-clo.com/diag"
 
 
 class DcloConnector(BaseConnector):
