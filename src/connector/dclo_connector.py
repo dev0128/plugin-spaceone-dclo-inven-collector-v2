@@ -1,6 +1,7 @@
 import logging
 import requests
 import json
+from uuid import uuid4
 
 from time import sleep
 
@@ -28,10 +29,12 @@ class DcloConnector(BaseConnector):
         self._check_secret_data(secret_data)
 
     def fetch_compliance_results(self, key_type, compliance, diag_data) -> dict:
+        uuid = uuid4().hex
         param = {
             **diag_data,
             "type": key_type,
             "ruleset_id": compliance,
+            "uuid": uuid,
         }
 
         result = {}
@@ -47,7 +50,9 @@ class DcloConnector(BaseConnector):
             sleep(PENDING_SECOND)
             waiting_timer += PENDING_SECOND
 
-            res = requests.get(f"{DCLO_PLUGIN_URL}/result/{diag_data['diag_id']}")
+            res = requests.get(
+                f"{DCLO_PLUGIN_URL}/result/{uuid}/{diag_data['diag_id']}"
+            )
             content = json.loads(res.content)
             status = content.get("status")
 
