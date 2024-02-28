@@ -143,12 +143,11 @@ class DcloManager(BaseManager):
                 cloud_service=cloud_service,
                 match_keys=[
                     [
-                        "name",
-                        "account",
-                        "provider",
-                        "cloud_service_group",
-                        "cloud_service_type",
                         "reference.resource_id",
+                        "provider",
+                        "cloud_service_type",
+                        "cloud_service_group",
+                        "account",
                     ]
                 ],
             )
