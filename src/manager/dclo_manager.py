@@ -117,7 +117,7 @@ class DcloManager(BaseManager):
 
     def collect_cloud_service(self, options, secret_data, schema):
         key_type, compliance, diag_data = self._covert_options(options, secret_data)
-        uuid, compliance_results = self.dclo_connector.fetch_compliance_results(
+        diag_id, compliance_results = self.dclo_connector.fetch_compliance_results(
             key_type, compliance, diag_data
         )
 
@@ -128,12 +128,15 @@ class DcloManager(BaseManager):
 
             cloud_service = make_cloud_service(
                 name=finding["code"],
-                account=uuid,
-                cloud_service_type=self.cloud_service_type,
-                cloud_service_group=self.cloud_service_group,
+                account=diag_id,
                 provider=self.provider,
+                cloud_service_group=self.cloud_service_group,
+                cloud_service_type=self.cloud_service_type,
                 region_code=finding["region"],
                 data=self._covert_dclo_to_spaceOne(finding),
+                reference={
+                    "resource_id": f'dclo:{self.provider}:{diag_id}:{self.cloud_service_type}:{finding["code"]}'.lower(),
+                },
             )
 
             yield make_response(
@@ -141,11 +144,11 @@ class DcloManager(BaseManager):
                 match_keys=[
                     [
                         "name",
-                        "reference.resource_id",
                         "account",
                         "provider",
-                        "cloud_service_type",
                         "cloud_service_group",
+                        "cloud_service_type",
+                        "reference.resource_id",
                     ]
                 ],
             )

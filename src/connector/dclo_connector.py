@@ -69,7 +69,7 @@ class DcloConnector(BaseConnector):
             if waiting_timer > PENDING_SECOND * TIME_LIMIT_MINUTE:
                 raise ERROR_REQUEST_TIMEOUT(key="options.provider")
 
-        return uuid, result
+        return diag_data["diag_id"], result
 
     @staticmethod
     def _check_options_data(options: dict):
