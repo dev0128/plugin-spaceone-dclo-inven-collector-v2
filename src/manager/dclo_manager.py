@@ -214,21 +214,23 @@ class DcloManager(BaseManager):
         if "role_arn" in secret_data:
             key_type = f"{selected_provider}-002"
             diag_data = {
-                "arg_1": secret_data["role_arn"],
+                "arg_1": secret_data["role_arn"],  #
                 "arg_2": secret_data["external_id"],
             }
-            diag_data["diag_id"] = hashlib.md5(
-                secret_data["role_arn"].encode()
-            ).hexdigest()
+            diag_data["diag_id"] = secret_data["role_arn"]
+            # diag_data["diag_id"] = hashlib.md5(
+            #     secret_data["role_arn"].encode()
+            # ).hexdigest()
         else:
             key_type = f"{selected_provider}-001"
             diag_data = {
-                "arg_1": secret_data["aws_access_key_id"],
+                "arg_1": secret_data["aws_access_key_id"],  #
                 "arg_2": secret_data["aws_secret_access_key"],
             }
-            diag_data["diag_id"] = hashlib.md5(
-                secret_data["aws_access_key_id"].encode()
-            ).hexdigest()
+            diag_data["diag_id"] = secret_data["aws_access_key_id"]
+            # diag_data["diag_id"] = hashlib.md5(
+            #     secret_data["aws_access_key_id"].encode()
+            # ).hexdigest()
 
         return key_type, diag_data
 
@@ -242,16 +244,19 @@ class DcloManager(BaseManager):
             "client_x509_cert_url": secret_data["client_x509_cert_url"],
             "private_key": secret_data["private_key"],
             "private_key_id": secret_data["private_key_id"],
-            "project_id": secret_data["project_id"],
+            "project_id": secret_data["project_id"],  #
             "token_uri": secret_data["token_uri"],
             "type": secret_data["type"],
         }
         diag_data = {
             "arg_1": json.dumps(key),
         }
-        diag_data["diag_id"] = hashlib.md5(
-            secret_data["auth_provider_x509_cert_url"].encode()
-        ).hexdigest()
+
+        diag_data["diag_id"] = secret_data["project_id"]
+
+        # diag_data["diag_id"] = hashlib.md5(
+        #     secret_data["auth_provider_x509_cert_url"].encode()
+        # ).hexdigest()
 
         return key_type, diag_data
 
@@ -261,11 +266,13 @@ class DcloManager(BaseManager):
             "arg_1": secret_data["client_id"],
             "arg_2": secret_data["tenant_id"],
             "arg_3": secret_data["client_secret"],
-            "arg_4": secret_data["subscription_id"],
+            "arg_4": secret_data["subscription_id"],  #
         }
-        diag_data["diag_id"] = hashlib.md5(
-            secret_data["client_id"].encode()
-        ).hexdigest()
+        diag_data["diag_id"] = secret_data["subscription_id"]
+
+        # diag_data["diag_id"] = hashlib.md5(
+        #     secret_data["client_id"].encode()
+        # ).hexdigest()
 
         return key_type, diag_data
 
