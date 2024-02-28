@@ -117,7 +117,7 @@ class DcloManager(BaseManager):
 
     def collect_cloud_service(self, options, secret_data, schema):
         key_type, compliance, diag_data = self._covert_options(options, secret_data)
-        diag_id, compliance_results = self.dclo_connector.fetch_compliance_results(
+        uuid, compliance_results = self.dclo_connector.fetch_compliance_results(
             key_type, compliance, diag_data
         )
 
@@ -128,7 +128,7 @@ class DcloManager(BaseManager):
 
             cloud_service = make_cloud_service(
                 name=finding["code"],
-                account=diag_id,
+                account=uuid,
                 cloud_service_type=self.cloud_service_type,
                 cloud_service_group=self.cloud_service_group,
                 provider=self.provider,
