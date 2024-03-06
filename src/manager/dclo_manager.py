@@ -117,9 +117,10 @@ class DcloManager(BaseManager):
 
     def collect_cloud_service(self, options, secret_data, schema):
         key_type, compliance, diag_data = self._covert_options(options, secret_data)
-        diag_id, compliance_results = self.dclo_connector.fetch_compliance_results(
+        compliance_results = self.dclo_connector.fetch_compliance_results(
             key_type, compliance, diag_data
         )
+        account_id = compliance_results["account_id"]
 
         for finding in compliance_results.get("findings", []):
 
@@ -128,14 +129,14 @@ class DcloManager(BaseManager):
 
             cloud_service = make_cloud_service(
                 name=finding["code"],
-                account=diag_id,
+                account=account_id,
                 provider=self.provider,
                 cloud_service_group=self.cloud_service_group,
                 cloud_service_type=self.cloud_service_type,
                 region_code=finding["region"],
                 data=self._covert_dclo_to_spaceOne(finding),
                 reference={
-                    "resource_id": f'dclo:{self.provider}:{diag_id}:{self.cloud_service_type}:{finding["code"]}'.lower(),
+                    "resource_id": f'dclo:{self.provider}:{account_id}:{self.cloud_service_type}:{finding["code"]}'.lower(),
                 },
             )
 
@@ -214,23 +215,16 @@ class DcloManager(BaseManager):
         if "role_arn" in secret_data:
             key_type = f"{selected_provider}-002"
             diag_data = {
-                "arg_1": secret_data["role_arn"],  #
+                "arg_1": secret_data["role_arn"],
                 "arg_2": secret_data["external_id"],
             }
-            diag_data["diag_id"] = secret_data["role_arn"]
-            # diag_data["diag_id"] = hashlib.md5(
-            #     secret_data["role_arn"].encode()
-            # ).hexdigest()
+
         else:
             key_type = f"{selected_provider}-001"
             diag_data = {
-                "arg_1": secret_data["aws_access_key_id"],  #
+                "arg_1": secret_data["aws_access_key_id"],
                 "arg_2": secret_data["aws_secret_access_key"],
             }
-            diag_data["diag_id"] = secret_data["aws_access_key_id"]
-            # diag_data["diag_id"] = hashlib.md5(
-            #     secret_data["aws_access_key_id"].encode()
-            # ).hexdigest()
 
         return key_type, diag_data
 
@@ -244,19 +238,13 @@ class DcloManager(BaseManager):
             "client_x509_cert_url": secret_data["client_x509_cert_url"],
             "private_key": secret_data["private_key"],
             "private_key_id": secret_data["private_key_id"],
-            "project_id": secret_data["project_id"],  #
+            "project_id": secret_data["project_id"],
             "token_uri": secret_data["token_uri"],
             "type": secret_data["type"],
         }
         diag_data = {
             "arg_1": json.dumps(key),
         }
-
-        diag_data["diag_id"] = secret_data["project_id"]
-
-        # diag_data["diag_id"] = hashlib.md5(
-        #     secret_data["auth_provider_x509_cert_url"].encode()
-        # ).hexdigest()
 
         return key_type, diag_data
 
@@ -266,54 +254,10 @@ class DcloManager(BaseManager):
             "arg_1": secret_data["client_id"],
             "arg_2": secret_data["tenant_id"],
             "arg_3": secret_data["client_secret"],
-            "arg_4": secret_data["subscription_id"],  #
+            "arg_4": secret_data["subscription_id"],
         }
-        diag_data["diag_id"] = secret_data["subscription_id"]
-
-        # diag_data["diag_id"] = hashlib.md5(
-        #     secret_data["client_id"].encode()
-        # ).hexdigest()
 
         return key_type, diag_data
-
-    # def _make_compliance_results(self, check_result):
-    #     results = []
-
-    #     account_id = check_result.get("diag_id")
-    #     payload = check_result.get("payload", {})
-
-    #     findings = payload.get("findings")
-    #     for finding in findings:
-    #         code = {
-    #             "account": account_id,
-    #             "name": finding["code"],
-    #             "reference": {
-    #                 "resource_id": self.cloud_service_type,
-    #             },
-    #             "data": self._covert_description_to_markdown(finding),
-    #             "metadata": {
-    #                 "view": {
-    #                     "sub_data": {
-    #                         "reference": {
-    #                             "resource_type": "inventory.CloudServiceType",
-    #                             "options": {
-    #                                 "provider": self.provider,
-    #                                 "cloud_service_group": self.cloud_service_group,
-    #                                 "cloud_service_type": self.cloud_service_type,
-    #                             },
-    #                         }
-    #                     }
-    #                 }
-    #             },
-    #             "provider": self.provider,
-    #             "cloud_service_group": self.cloud_service_group,
-    #             "cloud_service_type": self.cloud_service_type,
-    #             "region_code": "global",
-    #         }
-
-    #         results.append(code)
-
-    #     return results
 
     def _covert_dclo_to_spaceOne(self, finding):
 
@@ -343,12 +287,6 @@ class DcloManager(BaseManager):
         finding["vul_cnt"] = vul_cnt if checked_items else "-"
         finding["sec_cnt"] = sec_cnt if checked_items else "-"
         finding["tot_cnt"] = tot_cnt if checked_items else "-"
-
-        # finding["findings_cnt"] = (
-        #     f"{finding['flag_items']} / {finding['checked_items']}"
-        #     if finding["checked_items"]
-        #     else "-"
-        # )
 
         for key in finding:
             if key in [
