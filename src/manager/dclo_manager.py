@@ -99,7 +99,7 @@ class DcloManager(BaseManager):
         dashboard = {"aws": "AWS", "azure": "Azure", "google_cloud": "Google"}
         cloud_service_type["metadata"]["query_sets"][0][
             "name"
-        ] = f"D-CLO CSPM ({dashboard[self.provider]})"
+        ] = f"D-CLO CSPM {dashboard[self.provider]} ({self.cloud_service_type}) "
 
         # 위젯 지정
         # cloud_service_type["metadata"]["widget"] = METADATA_WIDGET
