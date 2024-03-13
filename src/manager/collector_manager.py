@@ -7,8 +7,6 @@ from src.model.dclo.collector import (
     GoogleCloudPluginInfo,
 )
 
-_LOGGER = logging.getLogger(__name__)
-
 
 class CollectorManager:
     provider = None

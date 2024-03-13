@@ -10,9 +10,7 @@ from src.manager.constant import COMPLIANCE_ICON, REGION, SERVICES
 
 from ..connector.dclo_connector import DcloConnector
 
-
 _LOGGER = logging.getLogger(__name__)
-
 
 COMPLIANCE_FRAMEWORKS = {
     "aws": {
@@ -109,7 +107,8 @@ class DcloManager(BaseManager):
             "spaceone:icon": COMPLIANCE_ICON[self.cloud_service_type]
         }
 
-        _LOGGER.debug(f"[collect_cloud_service_type] response = {cloud_service_type}")
+        _LOGGER.info(f"[collect_cloud_service_type] response = {cloud_service_type}")
+        print(f"[collect_cloud_service_type] response = {cloud_service_type}")
 
         yield make_response(
             cloud_service_type=cloud_service_type,
@@ -142,7 +141,8 @@ class DcloManager(BaseManager):
                 },
             )
 
-            _LOGGER.debug(f"[collect_cloud_service_type] response = {cloud_service}")
+            _LOGGER.info(f"[cloud_service] response = {cloud_service}")
+            print(f"[cloud_service] response = {cloud_service}")
 
             yield make_response(
                 cloud_service=cloud_service,
