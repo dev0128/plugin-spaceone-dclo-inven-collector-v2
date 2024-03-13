@@ -10,9 +10,7 @@ from src.manager.constant import COMPLIANCE_ICON, REGION, SERVICES
 
 from ..connector.dclo_connector import DcloConnector
 
-
 _LOGGER = logging.getLogger(__name__)
-
 
 COMPLIANCE_FRAMEWORKS = {
     "aws": {
@@ -20,39 +18,39 @@ COMPLIANCE_FRAMEWORKS = {
         "ISO-27001": "SET-00026108",
         "KISA-CSAP(표준)": "SET-00026102",
         "KISA-CSAP(간편)": "SET-00026103",
-        "PCI-DSS 4.0": "SET-00061100",
-        "PCI-DSS 3.2.1": "SET-00026109",
-        "CSP 안전성 평가": "SET-00026104",
-        "NIS-국가·공공 기관": "SET-00026105",
-        "NIS-민간 기관": "SET-00026106",
+        "PCI-DSS-4.0": "SET-00061100",
+        "PCI-DSS-3.2.1": "SET-00026109",
+        "CSP-안전성-평가": "SET-00026104",
+        "NIS-국가-공공-기관": "SET-00026105",
+        "NIS-민간-기관": "SET-00026106",
         "NIS-SaaS": "SET-00026107",
-        "D-CLO Best Practice": "SET-00011014",
+        "DCLO-Best-Practice": "SET-00011014",
     },
     "google_cloud": {
         "ISMS": "SET-00028110",
         "ISO-27001": "SET-00028114",
         "KISA-CSAP(표준)": "SET-00028111",
         "KISA-CSAP(간편)": "SET-00028112",
-        "PCI-DSS 4.0": "SET-00061102",
-        "PCI-DSS 3.2.1": "SET-00028115",
-        "CSP 안전성 평가": "SET-00028113",
-        "NIS-국가·공공 기관": "SET-00028116",
-        "NIS-민간 기관": "SET-00028117",
+        "PCI-DSS-4.0": "SET-00061102",
+        "PCI-DSS-3.2.1": "SET-00028115",
+        "CSP-안전성-평가": "SET-00028113",
+        "NIS-국가-공공-기관": "SET-00028116",
+        "NIS-민간-기관": "SET-00028117",
         "NIS-SaaS": "SET-00028118",
-        "D-CLO Best Practice": "SET-00028128",
+        "DCLO-Best-Practice": "SET-00028128",
     },
     "azure": {
         "ISMS": "SET-00028119",
         "ISO-27001": "SET-00028123",
         "KISA-CSAP(표준)": "SET-00028120",
         "KISA-CSAP(간편)": "SET-00028121",
-        "CSP 안전성 평가": "SET-00028122",
-        "PCI-DSS 4.0": "SET-00061103",
-        "PCI-DSS 3.2.1": "SET-00028124",
-        "NIS-국가·공공 기관": "SET-00028125",
-        "NIS-민간 기관": "SET-00028126",
+        "CSP-안전성-평가": "SET-00028122",
+        "PCI-DSS-4.0": "SET-00061103",
+        "PCI-DSS-3.2.1": "SET-00028124",
+        "NIS-국가-공공-기관": "SET-00028125",
+        "NIS-민간-기관": "SET-00028126",
         "NIS-SaaS": "SET-00028127",
-        "D-CLO Best Practice": "SET-00028129",
+        "DCLO-Best-Practice": "SET-00028129",
     },
 }
 
@@ -93,13 +91,14 @@ class DcloManager(BaseManager):
             metadata_path=self.metadata_path,
             is_primary=True,
             is_major=True,
+            labels=["Security", "Compliance"],
         )
 
         # 대쉬보드 명 지정
         dashboard = {"aws": "AWS", "azure": "Azure", "google_cloud": "Google"}
         cloud_service_type["metadata"]["query_sets"][0][
             "name"
-        ] = f"D-CLO CSPM {dashboard[self.provider]} ({self.cloud_service_type}) "
+        ] = f"D-CLO CSPM {dashboard[self.provider]} ({self.cloud_service_type})"
 
         # 위젯 지정
         # cloud_service_type["metadata"]["widget"] = METADATA_WIDGET
@@ -109,7 +108,8 @@ class DcloManager(BaseManager):
             "spaceone:icon": COMPLIANCE_ICON[self.cloud_service_type]
         }
 
-        _LOGGER.debug(f"[collect_cloud_service_type] response = {cloud_service_type}")
+        _LOGGER.info(f"[collect_cloud_service_type] response = {cloud_service_type}")
+        print(f"[collect_cloud_service_type] response = {cloud_service_type}")
 
         yield make_response(
             cloud_service_type=cloud_service_type,
@@ -142,7 +142,8 @@ class DcloManager(BaseManager):
                 },
             )
 
-            _LOGGER.debug(f"[collect_cloud_service_type] response = {cloud_service}")
+            _LOGGER.info(f"[cloud_service] response = {cloud_service}")
+            print(f"[cloud_service] response = {cloud_service}")
 
             yield make_response(
                 cloud_service=cloud_service,

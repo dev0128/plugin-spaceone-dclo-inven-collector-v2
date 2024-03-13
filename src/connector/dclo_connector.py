@@ -12,8 +12,6 @@ from spaceone.core.error import (
 )
 from spaceone.core.connector import BaseConnector
 
-_LOGGER = logging.getLogger(__name__)
-
 
 PENDING_SECOND = 60
 TIME_LIMIT_MINUTE = 150
