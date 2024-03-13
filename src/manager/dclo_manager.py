@@ -1,18 +1,17 @@
 import logging
-import hashlib
 import json
 
 from spaceone.core.manager import BaseManager
 from spaceone.inventory.plugin.collector.lib import *
 from spaceone.core.error import ERROR_INVALID_PARAMETER
 
-from src.manager.constant import COMPLIANCE_ICON, METADATA_WIDGET, REGION, SERVICES
+from src.manager.constant import COMPLIANCE_ICON, REGION, SERVICES
 
 
 from ..connector.dclo_connector import DcloConnector
 
 
-_LOGGER = logging.getLogger("cloudforet")
+_LOGGER = logging.getLogger(__name__)
 
 
 COMPLIANCE_FRAMEWORKS = {
@@ -74,6 +73,7 @@ class DcloManager(BaseManager):
             yield from self.collect_cloud_service_type(options, secret_data, schema)
             yield from self.collect_cloud_service(options, secret_data, schema)
         except Exception as e:
+
             yield make_error_response(
                 error=e,
                 provider=self.provider,
@@ -109,6 +109,8 @@ class DcloManager(BaseManager):
             "spaceone:icon": COMPLIANCE_ICON[self.cloud_service_type]
         }
 
+        _LOGGER.debug(f"[collect_cloud_service_type] response = {cloud_service_type}")
+
         yield make_response(
             cloud_service_type=cloud_service_type,
             match_keys=[["name", "group", "provider"]],
@@ -139,6 +141,8 @@ class DcloManager(BaseManager):
                     "resource_id": f'dclo:{self.provider}:{account_id}:{self.cloud_service_type}:{finding["code"]}'.lower(),
                 },
             )
+
+            _LOGGER.debug(f"[collect_cloud_service_type] response = {cloud_service}")
 
             yield make_response(
                 cloud_service=cloud_service,
