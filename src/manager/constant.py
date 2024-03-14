@@ -264,16 +264,28 @@ METADATA_WIDGET = [
     # },
 ]
 
+ISMS = "ISMS"
+ISO_27001 = "ISO-27001"
+KISA_CSAP_STD = "KISA-CSAP(표준)"
+KISA_CSAP_SIM = "KISA-CSAP(간편)"
+PCI_DSS_4 = "PCI-DSS-4.0"
+PCI_DSS_3 = "PCI-DSS-3.2.1"
+CSP = "CSP 안전성 평가"
+NIS_GOV = "NIS-국가-공공-기관"
+NIS_PUB = "NIS-민간-기관"
+NIS_SAAS = "NIS-SaaS"
+D_CLO = "D-CLO-Best-Practice"
+
 COMPLIANCE_ICON = {
-    "ISMS": "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/isms-p.png",
-    "ISO-27001": "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/iso27001.png",
-    "KISA-CSAP(표준)": "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/kisa-csap.png",
-    "KISA-CSAP(간편)": "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/kisa-csap.png",
-    "PCI-DSS 4.0": "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/pci-dss.png",
-    "PCI-DSS 3.2": "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/pci-dss.png",
-    "CSP 안전성 평가": "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/csp.png",
-    "NIS-국가·공공 기관": "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/nis.png",
-    "NIS-민간 기관": "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/nis.png",
-    "NIS-SaaS": "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/nis.png",
-    "D-CLO Best Practice": "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
+    ISMS: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/isms-p.png",
+    ISO_27001: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/iso27001.png",
+    KISA_CSAP_STD: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/kisa-csap.png",
+    KISA_CSAP_SIM: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/kisa-csap.png",
+    PCI_DSS_4: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/pci-dss.png",
+    PCI_DSS_3: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/pci-dss.png",
+    CSP: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/csp.png",
+    NIS_GOV: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/nis.png",
+    NIS_PUB: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/nis.png",
+    NIS_SAAS: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/nis.png",
+    D_CLO: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
 }
