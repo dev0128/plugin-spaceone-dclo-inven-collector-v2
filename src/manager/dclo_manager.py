@@ -106,7 +106,7 @@ class DcloManager(BaseManager):
             metadata_path=self.metadata_path,
             is_primary=True,
             is_major=True,
-            labels=["Security", "Compliance"],
+            labels=["Security", "Compliance", "CSPM"],
         )
 
         # 대쉬보드 명 지정
