@@ -157,9 +157,6 @@ class DcloManager(BaseManager):
                 },
             )
 
-            _LOGGER.info(f"[cloud_service] response = {cloud_service}")
-            print(f"[cloud_service] response = {cloud_service}")
-
             yield make_response(
                 cloud_service=cloud_service,
                 match_keys=[
