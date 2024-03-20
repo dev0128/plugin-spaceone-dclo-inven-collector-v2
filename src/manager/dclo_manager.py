@@ -1,4 +1,3 @@
-import logging
 import json
 
 from spaceone.core.manager import BaseManager
@@ -25,7 +24,6 @@ from src.manager.constant import (
 
 from ..connector.dclo_connector import DcloConnector
 
-_LOGGER = logging.getLogger(__name__)
 
 COMPLIANCE_FRAMEWORKS = {
     "aws": {
@@ -122,9 +120,6 @@ class DcloManager(BaseManager):
         cloud_service_type["tags"] = {
             "spaceone:icon": COMPLIANCE_ICON[self.cloud_service_type]
         }
-
-        _LOGGER.info(f"[collect_cloud_service_type] response = {cloud_service_type}")
-        print(f"[collect_cloud_service_type] response = {cloud_service_type}")
 
         yield make_response(
             cloud_service_type=cloud_service_type,
