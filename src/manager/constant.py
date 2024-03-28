@@ -277,15 +277,15 @@ NIS_SAAS = "NIS-SaaS"
 D_CLO = "D-CLO-Best-Practice"
 
 COMPLIANCE_ICON = {
-    ISMS: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/isms-p.png",
-    ISO_27001: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/iso27001.png",
-    KISA_CSAP_STD: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/kisa-csap.png",
-    KISA_CSAP_SIM: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/kisa-csap.png",
-    PCI_DSS_4: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/pci-dss.png",
-    PCI_DSS_3: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/pci-dss.png",
-    CSP: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/csp.png",
-    NIS_GOV: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/nis.png",
-    NIS_PUB: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/nis.png",
-    NIS_SAAS: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/nis.png",
+    ISMS: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
+    ISO_27001: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
+    KISA_CSAP_STD: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
+    KISA_CSAP_SIM: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
+    PCI_DSS_4: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
+    PCI_DSS_3: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
+    CSP: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
+    NIS_GOV: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
+    NIS_PUB: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
+    NIS_SAAS: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
     D_CLO: "https://spaceone-custom-assets.s3.ap-northeast-2.amazonaws.com/console-assets/icons/dclo/d-clo.png",
 }
