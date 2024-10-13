@@ -1,0 +1,11 @@
+---
+endpoints:
+  #config: grpc://localhost:50051/v1
+  #identity: grpc://localhost:50052/v1
+  #dashboard: grpc://localhost:50051/v1
+  #cost_analysis: grpc://localhost:50051/v1
+  #notification: grpc://localhost:50051/v1
+  #monitoring: grpc://localhost:50051/v1
+  inventory: grpc://localhost:50051/v1
+  #board: grpc://localhost:50051/v1
+  #repository: grpc://localhost:50051/v1
