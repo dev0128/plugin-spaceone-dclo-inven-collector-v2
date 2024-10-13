@@ -1,5 +1,12 @@
 # spaceOne - Plugin V2 로컬 세팅
 
+### 기본 구조
+
+- 클라이언트에서 D-CLO Plugin을 설치하고
+- 수집 REST API를 통해, D-CLO Engine에서 결과를 받음
+
+![D-CLO plugin 구조](/aws.png)
+
 ### 개발 환경 세팅
 
 - 아래와 같이 개발 환경 세팅
