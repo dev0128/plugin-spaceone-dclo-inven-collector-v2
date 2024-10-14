@@ -94,65 +94,8 @@ $ python -m spaceone.core.command run plugin-server src
 ### gRPC 서버 요청
 
 - 서버에 요청
-- 각 프로바이더 yaml 파일 먼저 작성
-
-### aws.yaml
-
-```yaml
-# collect.yaml
----
-options:
-    cloud_service_types:
-    - D-CLO
-    provider: aws
-    compliance_framework: ISMS
-secret_data:
-    # role_arn: arn:aws:iam::409631317012:role/dclo-test-role
-    # external_id: dclo-test-role
-    aws_access_key_id: 
-    aws_secret_access_key: 
-```
-
-### azr.yaml
-
-```yaml
-# collect.yaml
----
-options:
-    cloud_service_types:
-    - D-CLO
-    provider: azure
-    compliance_framework: PCI-DSS-3.2.1
-secret_data:
-    client_id: 
-    tenant_id: 
-    client_secret: 
-    subscription_id: 
-
-```
-
-### gcp.yaml
-
-```yaml
-# collect.yaml
----
-options:
-    cloud_service_types:
-    - D-CLO
-    provider: google_cloud
-    compliance_framework: D-CLO-Best-Practice
-secret_data:
-    type: "service_account"
-    project_id: 
-    private_key_id: 
-    private_key: 
-    client_email: 
-    client_id: 
-    auth_uri: 
-    token_uri: 
-    auth_provider_x509_cert_url: 
-    client_x509_cert_url: 
-```
+- 각 프로바이더 yaml 파일 작성 후
+- spacectl exec 사용하여 데이터 수집
 
 ```python
 $ spacectl exec collect inventory.Collector -f ./ctl/aws.yaml
