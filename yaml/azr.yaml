@@ -1,0 +1,12 @@
+# collect.yaml
+---
+options:
+  cloud_service_types:
+    - D-CLO
+  provider: azure
+  compliance_framework: PCI-DSS-3.2.1
+secret_data:
+  client_id: 
+  tenant_id: 
+  client_secret: 
+  subscription_id: 

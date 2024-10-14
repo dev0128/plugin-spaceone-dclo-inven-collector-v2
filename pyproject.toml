@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "spaceone-plugin-v2"
+version = "0.1.0"
+description = ""
+authors = ["dev0128 <joo@clo-guard.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.10.*"
+spacectl = "2.0.9"
+spaceone-core = "2.0.77"
+spaceone-api = "2.0.114"
+spaceone-inventory = "2.0.dev83"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

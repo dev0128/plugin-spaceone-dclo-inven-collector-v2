@@ -230,7 +230,13 @@ class DcloManager(BaseManager):
                 "arg_1": secret_data["role_arn"],
                 "arg_2": secret_data["external_id"],
             }
-
+        elif "aws_session_token" in secret_data:
+            key_type = f"{selected_provider}-003"
+            diag_data = {
+                "arg_1": secret_data["aws_access_key_id"],
+                "arg_2": secret_data["aws_secret_access_key"],
+                "arg_3": secret_data["aws_session_token"],
+            }
         else:
             key_type = f"{selected_provider}-001"
             diag_data = {
