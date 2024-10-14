@@ -26,24 +26,10 @@ $ poetry install
 
 1. `spacectl_config.yaml` 파일 세팅 후
 
-```yaml
----
-endpoints:
-    #config: grpc://localhost:50051/v1
-    #identity: grpc://localhost:50052/v1
-    #dashboard: grpc://localhost:50051/v1
-    #cost_analysis: grpc://localhost:50051/v1
-    #notification: grpc://localhost:50051/v1
-    #monitoring: grpc://localhost:50051/v1
-    inventory: grpc://localhost:50051/v1
-    #board: grpc://localhost:50051/v1
-    #repository: grpc://localhost:50051/v1
-```
-
 2. init 명령어 사용해서 적용
 
 ```python
-$ spacectl config init -f spacectl_config.yaml
+$ spacectl config init -f yaml/spacectl_config.yaml
 
 > local
 ```
@@ -56,7 +42,7 @@ $ spacectl config init -f spacectl_config.yaml
 $ spacectl config show
 ```
 
-### gRPC 서버 구동
+### 로컬 플러그인 gRPC 서버 구동
 
 - vscode 디버깅 세팅
 - `F5` 디버깅으로 gRPC 서버 실행
@@ -91,12 +77,16 @@ $ spacectl config show
 $ python -m spaceone.core.command run plugin-server src
 ```
 
-### gRPC 서버 요청
+### 로컬 플러그인 gRPC 서버 요청
 
 - 서버에 요청
 - 각 프로바이더 yaml 파일 작성 후
+  - ⚠️ 실제 키 정보가 커밋되지 않게 주의
+  - ctl 폴더로 yaml 복사해서 작성 후 사용
 - spacectl exec 사용하여 데이터 수집
 
 ```python
+$ mkdir -p ctl
+
 $ spacectl exec collect inventory.Collector -f ./ctl/aws.yaml
 ```
